@@ -45,7 +45,8 @@
     "lint": "oxlint .",
     "test": "ava",
     "version": "napi version",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublishOnly": "napi prepublish -t npm"
   },
   "devDependencies": {
     "@emnapi/core": "^1.4.5",
