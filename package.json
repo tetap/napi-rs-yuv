@@ -1,7 +1,7 @@
 {
   "name": "@tetap/yuv",
   "version": "1.0.0",
-  "description": "Template project for writing node package with napi-rs",
+  "description": "Template project for writing node package with napi-rs.",
   "main": "index.js",
   "repository": "https://github.com/tetap/napi-rs-yuv",
   "license": "MIT",
