@@ -30,8 +30,7 @@ pub fn rgba_to_yuv420p(rgba: &[u8], width: u32, height: u32) -> Result<Buffer> {
   let (y_plane, rest) = yuv.split_at_mut(y_size);
   let (u_plane, v_plane) = rest.split_at_mut(uv_size);
 
-  // 转换为 Y 分量（逐像素）
-  for i in 0..y_size {
+  for (i, y_pixel) in y_plane.iter_mut().enumerate().take(y_size) {
     let idx = i * 4;
     let r = rgba_data[idx] as f32;
     let g = rgba_data[idx + 1] as f32;
@@ -39,7 +38,7 @@ pub fn rgba_to_yuv420p(rgba: &[u8], width: u32, height: u32) -> Result<Buffer> {
 
     // BT.601 标准 Y 转换公式
     let y: f32 = 0.257 * r + 0.504 * g + 0.098 * b + 16.0;
-    y_plane[i] = y.clamp(16.0, 235.0) as u8;
+    *y_pixel = y.clamp(16.0, 235.0) as u8; // 注意这里使用解引用操作符
   }
 
   // 转换为 UV 分量（2x2 像素块平均）
@@ -275,7 +274,7 @@ pub fn merge_audio_arrays(
       ));
     }
     // 验证音量范围
-    if volume < 0.0 || volume > 1.0 {
+    if !(0.0..=1.0).contains(&volume) {
       return Err(Error::from_reason(format!(
         "音量值超出范围（0.0-1.0）: {}",
         volume
@@ -329,7 +328,7 @@ pub fn merge_audio_arrays(
         pcm.len()
       )));
     }
-    if volume < 0.0 || volume > 1.0 {
+    if !(0.0..=1.0).contains(&volume) {
       return Err(Error::from_reason(format!(
         "第{}个音量值超出范围（0.0-1.0）: {}",
         i, volume
