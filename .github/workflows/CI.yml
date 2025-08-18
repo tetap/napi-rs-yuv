@@ -140,6 +140,8 @@ jobs:
           path: artifacts
       - name: Move artifacts
         run: yarn artifacts
+      - name: echo workspace
+        run: echo ${{github.workspace}}
       - name: List packages
         run: ls -R ./npm
         shell: bash
