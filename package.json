@@ -96,11 +96,5 @@
     "trailingComma": "all",
     "singleQuote": true,
     "arrowParens": "always"
-  },
-  "optionalDependencies": {
-    "tetap-rs-yuv-win32-x64-msvc": "1.0.0",
-    "tetap-rs-yuv-darwin-x64": "1.0.0",
-    "tetap-rs-yuv-linux-x64-gnu": "1.0.0",
-    "tetap-rs-yuv-darwin-arm64": "1.0.0"
   }
 }
